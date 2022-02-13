@@ -27,5 +27,27 @@ def exist_property_pred():
     print(preds_as_str)
     return preds_as_str
 
+
+@app.route('/', methods=['POST'])
+def exist_property_pred_post():
+
+    # get headers and convert to integer
+    r = request.json
+    data = r[0]
+    pid = int(data['projectId'])
+    district = int(data['district'])
+    area = int(data['floor_area'])
+    floor = int(data['floor_range'])
+    top = int(data['top'])
+    tenure = int(data['tenure'])
+    year = int(data['year'])
+    month = int(data['month'])
+    
+    model = load('model.joblib')
+    preds = model.predict(np.array([[pid,district,area,floor,top,tenure,year,month]]))
+    preds_as_str = str(preds)
+    print(preds_as_str)
+    return preds_as_str
+
 if __name__=="__main__":
     app.run()
