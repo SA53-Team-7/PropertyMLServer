@@ -20,13 +20,13 @@ def exist_property_pred():
     tenure = int(data.get('tenure'))
     year = int(data.get('year'))
     month = int(data.get('month'))
+    sale_type = 3
     
-    model = load('model.joblib')
-    preds = model.predict(np.array([[pid,district,area,floor,top,tenure,year,month]]))
+    model = load('resale_model.pkl')
+    preds = model.predict(np.array([[pid,district,area,floor,top,tenure,year,month,sale_type]]))
     preds_as_str = str(preds)
     print(preds_as_str)
     return preds_as_str
-
 
 @app.route('/', methods=['POST'])
 def exist_property_pred_post():
@@ -42,9 +42,10 @@ def exist_property_pred_post():
     tenure = int(data['tenure'])
     year = int(data['year'])
     month = int(data['month'])
+    sale_type = 3
     
-    model = load('model.joblib')
-    preds = model.predict(np.array([[pid,district,area,floor,top,tenure,year,month]]))
+    model = load('resale_model.pkl')
+    preds = model.predict(np.array([[pid,district,area,floor,top,tenure,year,month,sale_type]]))
     preds_as_str = str(preds)
     print(preds_as_str)
     return preds_as_str
